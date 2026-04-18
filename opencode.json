@@ -1,4 +1,10 @@
 {
-    "model": "claude-sonnet-4-20250514",
-    "instructions": "Always commit before deploying. Always verify deployment with pm2 status after deploying. Never modify .env files. Always check logs if deployment fails."
+    "$schema": "https://opencode.ai/config.json",
+    "model": "anthropic/claude-sonnet-4-20250514",
+    "instructions": [
+        "Always commit before deploying",
+        "Always verify deployment with pm2 status after deploying",
+        "Never modify .env files",
+        "Always check logs if deployment fails"
+    ]
 }
