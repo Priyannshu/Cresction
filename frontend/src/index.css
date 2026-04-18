@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Premium glass-morphism effect */
+.glass {
+  @apply bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-2xl shadow-xl;
+}
+
+.glass-nav {
+  @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50;
+}
+
+/* Magnetic button effect */
+.magnetic-btn {
+  @apply transition-transform duration-300 ease-out hover:scale-105 active:scale-95;
+}
+
+/* Product card hover effect */
+.product-card {
+  @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+}
+
+/* Smooth theme transition */
+.theme-transition {
+  @apply transition-colors duration-300;
+}
