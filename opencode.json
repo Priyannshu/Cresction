@@ -1,9 +1,4 @@
 {
-  "model": "claude-sonnet-4-20250514",
-  "rules": [
-    "Always commit before deploying",
-    "Always verify deployment with pm2 status after deploying",
-    "Never modify .env files",
-    "Always check logs if deployment fails"
-  ]
+    "model": "claude-sonnet-4-20250514",
+    "instructions": "Always commit before deploying. Always verify deployment with pm2 status after deploying. Never modify .env files. Always check logs if deployment fails."
 }
