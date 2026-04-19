@@ -76,6 +76,8 @@ services:
       NODE_ENV: development
       PORT: 3002
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/cresction?schema=public
+      JWT_SECRET: your_jwt_secret_key_change_in_production
+      JWT_EXPIRES_IN: 7d
     depends_on:
       - postgres
     networks:
@@ -90,6 +92,8 @@ services:
       NODE_ENV: development
       PORT: 3003
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/cresction?schema=public
+      JWT_SECRET: your_jwt_secret_key_change_in_production
+      JWT_EXPIRES_IN: 7d
       REDIS_URL: redis://redis:6379
     depends_on:
       - postgres
