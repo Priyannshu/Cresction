@@ -19,7 +19,9 @@ redisClient.connect().catch(console.error);
 // Middleware
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ verify: (req, res, buf) => {
+  req.rawBody = buf;
+}}));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -35,6 +37,13 @@ app.use('/api/auth', createProxyMiddleware({
   changeOrigin: true,
   pathRewrite: {
     '^/api/auth': '/api',
+  },
+  onProxyReq: (proxyReq, req) => {
+    if (req.body) {
+      const bodyData = JSON.stringify(req.body);
+      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+      proxyReq.write(bodyData);
+    }
   },
 }));
 
