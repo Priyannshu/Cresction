@@ -33,8 +33,6 @@ app.use(limiter);
 app.use('/api/auth', createProxyMiddleware({
   target: process.env.USER_SERVICE_URL,
   changeOrigin: true,
-  proxyTimeout: 30000,
-  timeout: 30000,
 }));
 
 // Protect all other API routes: verify JWT
@@ -60,29 +58,21 @@ const authenticateToken = (req, res, next) => {
 app.use('/api/users', authenticateToken, createProxyMiddleware({
   target: process.env.USER_SERVICE_URL,
   changeOrigin: true,
-  proxyTimeout: 30000,
-  timeout: 30000,
 }));
 
 app.use('/api/products', createProxyMiddleware({
   target: process.env.PRODUCT_SERVICE_URL,
   changeOrigin: true,
-  proxyTimeout: 30000,
-  timeout: 30000,
 }));
 
 app.use('/api/categories', createProxyMiddleware({
   target: process.env.PRODUCT_SERVICE_URL,
   changeOrigin: true,
-  proxyTimeout: 30000,
-  timeout: 30000,
 }));
 
 app.use('/api/cart', authenticateToken, createProxyMiddleware({
   target: process.env.CART_SERVICE_URL,
   changeOrigin: true,
-  proxyTimeout: 30000,
-  timeout: 30000,
 }));
 
 // Health check gateway
