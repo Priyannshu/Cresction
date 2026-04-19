@@ -19,9 +19,7 @@ redisClient.connect().catch(console.error);
 // Middleware
 app.use(helmet());
 app.use(cors());
-app.use(express.json({ verify: (req, res, buf) => {
-  req.rawBody = buf;
-}}));
+app.use(express.json());
 
 // Rate limiting
 const limiter = rateLimit({
@@ -35,16 +33,6 @@ app.use(limiter);
 app.use('/api/auth', createProxyMiddleware({
   target: process.env.USER_SERVICE_URL,
   changeOrigin: true,
-  pathRewrite: {
-    '^/api/auth': '/api',
-  },
-  onProxyReq: (proxyReq, req) => {
-    if (req.body) {
-      const bodyData = JSON.stringify(req.body);
-      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
-      proxyReq.write(bodyData);
-    }
-  },
 }));
 
 // Protect all other API routes: verify JWT
@@ -70,33 +58,21 @@ const authenticateToken = (req, res, next) => {
 app.use('/api/users', authenticateToken, createProxyMiddleware({
   target: process.env.USER_SERVICE_URL,
   changeOrigin: true,
-  pathRewrite: {
-    '^/api/users': '/api',
-  },
 }));
 
 app.use('/api/products', createProxyMiddleware({
   target: process.env.PRODUCT_SERVICE_URL,
   changeOrigin: true,
-  pathRewrite: {
-    '^/api/products': '/api',
-  },
 }));
 
 app.use('/api/categories', createProxyMiddleware({
   target: process.env.PRODUCT_SERVICE_URL,
   changeOrigin: true,
-  pathRewrite: {
-    '^/api/categories': '/api',
-  },
 }));
 
 app.use('/api/cart', authenticateToken, createProxyMiddleware({
   target: process.env.CART_SERVICE_URL,
   changeOrigin: true,
-  pathRewrite: {
-    '^/api/cart': '/api',
-  },
 }));
 
 // Health check gateway
