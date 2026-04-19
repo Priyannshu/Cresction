@@ -14,6 +14,7 @@ const pool = new Pool({
 });
 
 // Middleware
+app.set('trust proxy', 1);
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
@@ -23,6 +24,7 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 200,
   message: { error: 'Too many requests, please try again later.' },
+  validate: { xForwardedFor: false },
 });
 app.use('/api/', limiter);
 
