@@ -54,6 +54,8 @@ services:
       context: ./backend/user-service
       dockerfile: Dockerfile
     container_name: cresction-user-service
+    ports:
+      - "3001:3001"
     environment:
       NODE_ENV: development
       PORT: 3001
@@ -72,6 +74,8 @@ services:
       context: ./backend/product-service
       dockerfile: Dockerfile
     container_name: cresction-product-service
+    ports:
+      - "3002:3002"
     environment:
       NODE_ENV: development
       PORT: 3002
